@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>Форма заявки</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#submit-form').click(function(e) {
+                e.preventDefault();
+
+                // Получение значений полей формы
+                var name = $('#name').val();
+                var phone = $('#phone').val();
+                var email = $('#email').val();
+                var city = $('#city').val();
+                var service = $('#service').val();
+                var comment = $('#comment').val();
+
+                // Отправка данных формы через Ajax
+                $.ajax({
+                    type: 'POST',
+                    url: 'process_lead.php', // Путь к PHP-обработчику
+                    data: {
+                        name: name,
+                        phone: phone,
+                        email: email,
+                        city: city,
+                        service: service,
+                        comment: comment
+                    },
+                    success: function(response) {
+                        console.log(response);
+                        // Обработка успешного ответа от сервера
+                        alert('Заявка успешно отправлена!');
+                    },
+                    error: function(error) {
+                        console.log(error);
+                        // Обработка ошибок
+                        alert('Произошла ошибка при отправке заявки. Пожалуйста, попробуйте ещё раз.');
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<h1>Форма заявки</h1>
+<form id="lead-form">
+    <label for="name">Имя:</label>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="phone">Телефон:</label>
+    <input type="text" id="phone" name="phone" required><br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <label for="city">Город:</label>
+    <input type="text" id="city" name="city" required><br><br>
+
+    <label for="service">Услуга:</label>
+    <select id="service" name="service" required>
+        <option value="Диагностика">Диагностика</option>
+        <option value="Ремонт">Ремонт</option>
+    </select><br><br>
+
+    <label for="comment">Комментарий:</label>
+    <textarea id="comment" name="comment"></textarea><br><br>
+
+    <button type="submit" id="submit-form">Отправить</button>
+</form>
+</body>
+</html>

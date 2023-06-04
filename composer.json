@@ -1,0 +1,9 @@
+{
+    "require": {
+        "amocrm/amocrm-api-library": "^1.0",
+        "dotzero/amocrm": "^0.3.29",
+        "amocrm/oauth2-amocrm": "^2.0",
+      "ext-json": "*",
+        "ext-curl": "*"
+    }
+}
